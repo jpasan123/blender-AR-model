@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased;
+  }
+}
+
+.webxr-button {
+  @apply bg-purple-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-700 transition-colors;
+}
+
+/* Ensure video elements work properly on iOS */
+video {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+/* Hide video controls on iOS */
+video::-webkit-media-controls {
+  display: none !important;
+}
