@@ -12,11 +12,10 @@ const ARModelViewer: React.FC = () => {
           <Canvas
             style={{ 
               position: 'absolute', 
-              top: '55%', 
-              left: '55%', 
-              right: '50%',
-              width: '450%', 
-              height: '450%',
+              top: '50%', 
+              left: '50%',
+              width: '100%', 
+              height: '100%',
               transform: 'translate(-50%, -50%)',
               touchAction: 'none',
               WebkitTouchCallout: 'none',
@@ -25,7 +24,7 @@ const ARModelViewer: React.FC = () => {
             }}
             camera={{ 
               position: [0, 0, 9],
-              fov: 50,
+              fov: 75, // Increased FOV for better mobile visibility
               near: 0.1,
               far: 1000
             }}

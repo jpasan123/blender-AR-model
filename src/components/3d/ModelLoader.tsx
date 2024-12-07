@@ -62,15 +62,15 @@ export const ModelLoader = () => {
       const center = new Vector3();
       box.getCenter(center);
 
-      // Calculate scale to fit in view
+      // Calculate scale to fit in view - increased scale factor
       const maxDim = Math.max(size.x, size.y, size.z);
-      const scale = isMobile() ? 1.5 / maxDim : 1.85 / maxDim;
+      const scale = isMobile() ? 3.0 / maxDim : 3.5 / maxDim; // Increased scale factors
       gltf.scene.scale.multiplyScalar(scale);
 
-      // Center the model
+      // Center the model and adjust position
       gltf.scene.position.x = -center.x * scale;
-      gltf.scene.position.y = (-center.y * scale) - 1; // Offset down by 1 unit
-      gltf.scene.position.z = isMobile() ? -2 : 0;
+      gltf.scene.position.y = (-center.y * scale) - 0.5; // Adjusted vertical position
+      gltf.scene.position.z = isMobile() ? -1.5 : -1; // Brought closer to camera
 
       // Setup animations if they exist
       if (gltf.animations?.length > 0) {
@@ -83,14 +83,14 @@ export const ModelLoader = () => {
         });
       }
 
-      // Apply material settings for better visibility from all angles
+      // Apply material settings for better visibility
       gltf.scene.traverse((child) => {
         if (child instanceof Mesh) {
           if (child.material instanceof MeshStandardMaterial) {
             child.material.roughness = 0.5;
             child.material.metalness = 0.5;
             child.material.envMapIntensity = 1.5;
-            child.material.side = 2; // Enable double-sided rendering
+            child.material.side = 2;
           }
           child.castShadow = true;
           child.receiveShadow = true;
