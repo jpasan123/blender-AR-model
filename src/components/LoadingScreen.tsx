@@ -10,13 +10,13 @@ const LoadingScreen = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="relative"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.2 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
             className="flex justify-center mb-6"
           >
             <div className="w-64 h-64 flex items-center justify-center">
@@ -40,7 +40,7 @@ const LoadingScreen = () => {
             className="text-5xl md:text-7xl font-bold text-white tracking-wider"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.2 }}
+            transition={{ delay: 0.3, duration: 1 }}
           >
             TRACE AR
           </motion.h1>
@@ -49,7 +49,7 @@ const LoadingScreen = () => {
             className="mt-8 flex justify-center space-x-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.2 }}
+            transition={{ delay: 0.5 }}
           >
             {[...Array(3)].map((_, i) => (
               <motion.div
@@ -59,9 +59,9 @@ const LoadingScreen = () => {
                   y: ["0%", "-50%", "0%"],
                 }}
                 transition={{
-                  duration: 0.4,
+                  duration: 0.8,
                   repeat: Infinity,
-                  delay: i * 0.1,
+                  delay: i * 0.2,
                 }}
               />
             ))}
@@ -71,7 +71,7 @@ const LoadingScreen = () => {
             className="mt-4 text-primary text-sm tracking-wider"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.2 }}
+            transition={{ delay: 0.7 }}
           >
             Initializing AR Experience
           </motion.div>
