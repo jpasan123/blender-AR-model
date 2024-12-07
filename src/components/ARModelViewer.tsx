@@ -23,8 +23,8 @@ const ARModelViewer: React.FC = () => {
               userSelect: 'none'
             }}
             camera={{ 
-              position: [0, 0, 9],
-              fov: 75, // Increased FOV for better mobile visibility
+              position: [0, 0, 5],
+              fov: 85, // Further increased FOV
               near: 0.1,
               far: 1000
             }}

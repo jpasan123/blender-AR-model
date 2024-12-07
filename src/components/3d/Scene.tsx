@@ -8,8 +8,8 @@ export const Scene = () => {
     <>
       <PerspectiveCamera 
         makeDefault 
-        position={[0, 0, isMobile() ? 8 : 6]} // Adjusted camera distance
-        fov={isMobile() ? 65 : 60} // Adjusted field of view
+        position={[0, 0, isMobile() ? 5 : 4]} // Moved camera closer
+        fov={isMobile() ? 75 : 70} // Increased FOV further
         near={0.1}
         far={1000}
       />
@@ -37,12 +37,12 @@ export const Scene = () => {
       <OrbitControls 
         enableDamping
         dampingFactor={0.05}
-        minDistance={isMobile() ? 3 : 2} // Adjusted min distance
-        maxDistance={isMobile() ? 15 : 12} // Adjusted max distance
+        minDistance={isMobile() ? 2 : 1.5} // Reduced min distance
+        maxDistance={isMobile() ? 10 : 8} // Reduced max distance
         enablePan={false}
         autoRotate={false}
         rotateSpeed={isMobile() ? 0.5 : 1}
-        target={[0, 0, 0]} // Centered target
+        target={[0, 0, 0]}
         makeDefault
       />
     </>
