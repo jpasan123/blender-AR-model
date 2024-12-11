@@ -12,7 +12,7 @@ const ARModelViewer: React.FC = () => {
     // Navigate to thank you page after 5 seconds
     const timer = setTimeout(() => {
       navigate('/thank-you');
-    }, 40000);
+    }, 35000);
 
     return () => clearTimeout(timer);
   }, [navigate]);
