@@ -1,10 +1,22 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Scene } from './3d/Scene';
 import { ErrorBoundary } from './ErrorBoundary';
 import LoadingScreen from './LoadingScreen';
+import { useNavigate } from 'react-router-dom';
 
 const ARModelViewer: React.FC = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Navigate to thank you page after 5 seconds
+    const timer = setTimeout(() => {
+      navigate('/thank-you');
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, [navigate]);
+
   return (
     <div className="absolute inset-0 z-10 pointer-events-auto touch-none select-none">
       <ErrorBoundary>
