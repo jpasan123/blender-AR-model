@@ -27,7 +27,7 @@ const ThankYouPage = () => {
           transition={{ delay: 0.4 }}
           className="text-3xl font-bold text-gray-900 mb-4"
         >
-          Thank You!
+          Welcome!
         </motion.h1>
 
         <motion.p
