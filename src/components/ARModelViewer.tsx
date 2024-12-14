@@ -8,8 +8,8 @@ import { isMobile } from '../utils/deviceDetection';
 
 const ARModelViewer: React.FC = () => {
   const navigate = useNavigate();
+  const startTime = Date.now(); // Moved out of state to avoid re-renders
   const [modelLoaded, setModelLoaded] = useState(false);
-  const [startTime] = useState(Date.now());
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
