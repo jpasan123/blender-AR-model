@@ -39,7 +39,7 @@ const ARModelViewer: React.FC = () => {
     // Add a small delay before setting modelLoaded to ensure initialization is complete
     setTimeout(() => {
       setModelLoaded(true);
-    }, 2000);
+    }, 1000);
   };
 
   return (
