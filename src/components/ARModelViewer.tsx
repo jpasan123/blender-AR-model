@@ -16,9 +16,9 @@ const ARModelViewer: React.FC = () => {
 
     if (modelLoaded) {
       const loadTime = Date.now() - startTime;
-      const baseDelay = 10000; // 10 seconds base delay
-      const mobileDelay = isMobile() ? 15000 : baseDelay; // 15 seconds for mobile
-      const totalDelay = Math.max(mobileDelay - loadTime, 5000); // Ensure minimum 10s viewing time
+      const baseDelay = 20000; // 20 seconds base delay
+      const mobileDelay = isMobile() ? 30000 : baseDelay; // 30 seconds for mobile
+      const totalDelay = Math.max(mobileDelay - loadTime, 10000); // Ensure minimum 10s viewing time
 
       console.log(`Setting thank you page timer for: ${totalDelay}ms`);
       
@@ -39,7 +39,7 @@ const ARModelViewer: React.FC = () => {
     // Add a small delay before setting modelLoaded to ensure initialization is complete
     setTimeout(() => {
       setModelLoaded(true);
-    }, 1000);
+    }, 2000);
   };
 
   return (
