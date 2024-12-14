@@ -1,21 +1,46 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Scene } from './3d/Scene';
 import { ErrorBoundary } from './ErrorBoundary';
 import LoadingScreen from './LoadingScreen';
 import { useNavigate } from 'react-router-dom';
+import { isMobile } from '../utils/deviceDetection';
 
 const ARModelViewer: React.FC = () => {
   const navigate = useNavigate();
+  const [modelLoaded, setModelLoaded] = useState(false);
+  const [startTime] = useState(Date.now());
 
   useEffect(() => {
-    // Navigate to thank you page after 5 seconds
-    const timer = setTimeout(() => {
-      navigate('/thank-you');
-    }, 12000);
+    let timer: NodeJS.Timeout;
 
-    return () => clearTimeout(timer);
-  }, [navigate]);
+    if (modelLoaded) {
+      const loadTime = Date.now() - startTime;
+      const baseDelay = 10000; // 10 seconds base delay
+      const mobileDelay = isMobile() ? 15000 : baseDelay; // 15 seconds for mobile
+      const totalDelay = Math.max(mobileDelay - loadTime, 5000); // Ensure minimum 10s viewing time
+
+      console.log(`Setting thank you page timer for: ${totalDelay}ms`);
+      
+      timer = setTimeout(() => {
+        navigate('/thank-you');
+      }, totalDelay);
+    }
+
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }, [modelLoaded, navigate, startTime]);
+
+  const handleModelLoaded = () => {
+    console.log('Model loaded at:', Date.now() - startTime, 'ms');
+    // Add a small delay before setting modelLoaded to ensure initialization is complete
+    setTimeout(() => {
+      setModelLoaded(true);
+    }, 1000);
+  };
 
   return (
     <div className="absolute inset-0 z-10 pointer-events-auto touch-none select-none">
@@ -36,7 +61,7 @@ const ARModelViewer: React.FC = () => {
             }}
             camera={{ 
               position: [0, 0, 5],
-              fov: 85, // Further increased FOV
+              fov: 85,
               near: 0.1,
               far: 1000
             }}
@@ -54,7 +79,7 @@ const ARModelViewer: React.FC = () => {
             eventSource={document.documentElement}
             eventPrefix="client"
           >
-            <Scene />
+            <Scene onLoaded={handleModelLoaded} />
           </Canvas>
         </Suspense>
       </ErrorBoundary>

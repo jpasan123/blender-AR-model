@@ -3,18 +3,22 @@ import { OrbitControls, Environment, PerspectiveCamera } from '@react-three/drei
 import { ModelLoader } from './ModelLoader';
 import { isMobile } from '../../utils/deviceDetection';
 
-export const Scene = () => {
+interface SceneProps {
+  onLoaded?: () => void;
+}
+
+export const Scene: React.FC<SceneProps> = ({ onLoaded }) => {
   return (
     <>
       <PerspectiveCamera 
         makeDefault 
-        position={[0, 0, isMobile() ? 5 : 4]} // Moved camera closer
-        fov={isMobile() ? 75 : 70} // Increased FOV further
+        position={[0, 0, isMobile() ? 5 : 4]}
+        fov={isMobile() ? 75 : 70}
         near={0.1}
         far={1000}
       />
       
-      <ModelLoader />
+      <ModelLoader onLoad={onLoaded} />
       
       <Environment preset="sunset" />
       
@@ -37,8 +41,8 @@ export const Scene = () => {
       <OrbitControls 
         enableDamping
         dampingFactor={0.05}
-        minDistance={isMobile() ? 2 : 1.5} // Reduced min distance
-        maxDistance={isMobile() ? 10 : 8} // Reduced max distance
+        minDistance={isMobile() ? 2 : 1.5}
+        maxDistance={isMobile() ? 10 : 8}
         enablePan={false}
         autoRotate={false}
         rotateSpeed={isMobile() ? 0.5 : 1}
